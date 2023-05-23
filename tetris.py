@@ -3,6 +3,28 @@ import random
 import keyboard
 
 blocks = ["I", "J", "L", "O", "S", "T", "Z"]
+blocksShape = {"I":[[1,0,0,0],
+                [1,0,0,0],
+                [1,0,0,0],
+                [1,0,0,0]],"J": [[0,1,0,0],
+                            [0,1,0,0],
+                            [1,1,0,0],
+                            [0,0,0,0]],"L": [[1,0,0,0],
+                                        [1,0,0,0],
+                                        [1,1,0,0],
+                                        [0,0,0,0]],"O": [[1,1,0,0],
+                                                    [1,1,0,0],
+                                                    [0,0,0,0],
+                                                    [0,0,0,0]],"S": [[0,1,1,0],
+                                                                [1,1,0,0],
+                                                                [0,0,0,0],
+                                                                [0,0,0,0]],"T": [[0,1,0,0],
+                                                                            [1,1,1,0],
+                                                                            [0,0,0,0],
+                                                                            [0,0,0,0]],"Z": [[1,1,0,0],
+                                                                                        [0,1,1,0],
+                                                                                        [0,0,0,0],
+                                                                                        [0,0,0,0]]}
 block = ""
 
 def turnover(board):
@@ -11,13 +33,13 @@ def turnover(board):
         block = blocks[random.randint(0,6)]
         # place the block on top of the board
         print("Block:", block)
-        spawnBlock(board)
+        spawnBlock(board, block)
         
     cmd = input("\nEnter the command: ")
     
-    if (cmd == "down") or (cmd == "left") or (cmd == "right"):
-        print("Move cmd: ", cmd)
-        move(cmd)
+    if (cmd.lower() == "down") or (cmd.lower() == "left") or (cmd.lower() == "right"):
+        print("Move cmd: ", cmd.lower())
+        move(cmd.lower())
     else:
         # other command operation (rotate, instant drop)
         if cmd.lower() == "drop":
@@ -46,7 +68,9 @@ def rotate(cmd):
 def drop():
     pass
 
-def spawnBlock(board):
+def spawnBlock(board, block):
+    actBlock = blocksShape[block]
+    
     pass
 
 # Game Start
@@ -56,8 +80,7 @@ def main():
     for i in range(20):
         row = []
         for j in range(10):
-            if i == 1: row.append(1)
-            else: row.append(0)
+            row.append(0)
         board.append(row)
     
     print_board(board)
