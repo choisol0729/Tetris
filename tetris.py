@@ -11,18 +11,22 @@ def turnover(board):
         block = blocks[random.randint(0,6)]
         # place the block on top of the board
         print("Block:", block)
-    cmd = input("Enter the command: ")
-    if cmd == "down" or "left" or "right":
-        print("CMD: ", cmd)
+        spawnBlock(board)
+        
+    cmd = input("\nEnter the command: ")
+    
+    if (cmd == "down") or (cmd == "left") or (cmd == "right"):
+        print("Move cmd: ", cmd)
         move(cmd)
     else:
         # other command operation (rotate, instant drop)
+        if cmd.lower() == "drop":
+            drop()
         pass
-    if game_over(board):
-        return True
-    else:
-        return False
-
+    
+    
+    return game_over(board)
+    
 def print_board(board):
     for i in range(len(board)):
         string = ""
@@ -39,6 +43,12 @@ def move(cmd):
 def rotate(cmd):
     pass
 
+def drop():
+    pass
+
+def spawnBlock(board):
+    pass
+
 # Game Start
 def main():
     gameover = False
@@ -46,12 +56,15 @@ def main():
     for i in range(20):
         row = []
         for j in range(10):
-            row.append(0)
+            if i == 1: row.append(1)
+            else: row.append(0)
         board.append(row)
     
     print_board(board)
+    
     while(not gameover):
         gameover = turnover(board)
+        print_board(board)
 
 if __name__ == "__main__":
     main()
