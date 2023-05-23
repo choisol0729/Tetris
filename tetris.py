@@ -6,6 +6,7 @@ blocks = ["I", "J", "L", "O", "S", "T", "Z"]
 block = ""
 
 def turnover(board):
+    global block
     if block == "": 
         block = blocks[random.randint(0,6)]
         # place the block on top of the board
