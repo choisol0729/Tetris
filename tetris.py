@@ -43,7 +43,7 @@ def turnover(board):
     return game_over(board)
     
 def print_board(board):
-    for i in range(len(board)):
+    for i in range(len(board)-4):
         string = ""
         for j in range(len(board[i])):
             string += str(board[i][j]) + " "
@@ -63,14 +63,25 @@ def drop():
 
 def spawnBlock(board, block):
     actBlock = blocksShape[block]
-    
+    if actBlock != blocksShape["I"] and actBlock != blocksShape["O"]:
+        for i in range(3):
+            for j in range(3):
+                board[i][j+4] = actBlock[i][j]
+    elif actBlock == blocksShape["I"]:
+        for i in range(4):
+            for j in range(4):
+                board[i][j+4] = actBlock[i][j]
+    elif actBlock != blocksShape["O"]:
+        for i in range(2):
+            for j in range(2):
+                board[i][j+4] = actBlock[i][j]
     pass
 
 # Game Start
 def main():
     gameover = False
     board = []
-    for i in range(20):
+    for i in range(24):
         row = []
         for j in range(10):
             row.append(0)
