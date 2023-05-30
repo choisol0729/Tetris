@@ -20,6 +20,11 @@ blocksShape = {"I":[[0,1,0,0],
                                                                                         [0,0,0]]}
 block = ""
 
+class block:
+    def __init__(self, name):
+        self.matrix = blocksShape[name]
+        self.pos = [0,4]
+
 def turnover(board):
     global block
     if block == "": 
@@ -35,12 +40,13 @@ def turnover(board):
     if (cmd.lower() == "down") or (cmd.lower() == "left") or (cmd.lower() == "right"):
         print("Move cmd: ", cmd.lower())
         move(cmd.lower())
+    elif cmd == "":
+        move("down")
     else:
         # other command operation (rotate, instant drop)
         if cmd.lower() == "drop":
             drop()
         pass
-    
     
     return game_over(board)
     
@@ -57,14 +63,17 @@ def game_over(board):
             return True
     return False
 
-def move(cmd):
+def move(cmd, block):
     pass
 
-def rotate(cmd):
+def rotate(cmd, block):
     pass
 
-def drop():
+def drop(block):
     pass
+
+def detectBlock(blockName):
+    
 
 def spawnBlock(board, block):
     actBlock = blocksShape[block]
@@ -76,7 +85,7 @@ def spawnBlock(board, block):
         for i in range(4):
             for j in range(4):
                 board[i][j+4] = actBlock[i][j]
-    elif actBlock != blocksShape["O"]:
+    elif actBlock == blocksShape["O"]:
         for i in range(2):
             for j in range(2):
                 board[i][j+4] = actBlock[i][j]
