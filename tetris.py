@@ -27,6 +27,8 @@ def turnover(board):
         # place the block on top of the board
         print("Block:", block)
         spawnBlock(board, block)
+    
+    print_board(board)
         
     cmd = input("\nEnter the command: ")
     
@@ -43,13 +45,16 @@ def turnover(board):
     return game_over(board)
     
 def print_board(board):
-    for i in range(len(board)-4):
+    for i in range(len(board)):
         string = ""
         for j in range(len(board[i])):
             string += str(board[i][j]) + " "
         print(string)
         
 def game_over(board):
+    for i in range(10):
+        if (board[20][i] == 1):
+            return True
     return False
 
 def move(cmd):
@@ -87,11 +92,8 @@ def main():
             row.append(0)
         board.append(row)
     
-    print_board(board)
-    
     while(not gameover):
         gameover = turnover(board)
-        print_board(board)
 
 if __name__ == "__main__":
     main()
